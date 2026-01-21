@@ -1,22 +1,30 @@
 package raisetech.student.managemant;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
 public class Application {
 
+	private String name = "Yamada Shuto";
+
 	public static void main(String[] args) {
 
 		SpringApplication.run(Application.class, args);
 	}
 
-	@GetMapping("/hello")
-	public String hello(){
-		return "Hello,World";
+	@GetMapping("/name")
+	public String getName(){
+		return name;
 	}
 
+	@PostMapping ("/name")
+	public void setName (String name){
+		this.name = name;
+	}
 }
