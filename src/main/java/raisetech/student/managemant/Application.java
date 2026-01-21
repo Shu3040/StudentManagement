@@ -12,19 +12,25 @@ import org.springframework.web.bind.annotation.RestController;
 public class Application {
 
 	private String name = "Yamada Shuto";
+	private String age = "27";
 
 	public static void main(String[] args) {
 
 		SpringApplication.run(Application.class, args);
 	}
 
-	@GetMapping("/name")
-	public String getName(){
-		return name;
+	@GetMapping("/studentInfo")
+	public String getstudentInfo(){
+		return name + " " + age + "歳";
 	}
 
-	@PostMapping ("/name")
-	public void setName (String name){
+	@PostMapping ("/studentInfo")
+	public void setstudentInfo (String name,String age){
+		this.name = name;
+		this.age = age;
+	}
+	@PostMapping("/studentName")
+	public void  updateStudentName(String name){
 		this.name = name;
 	}
 }
