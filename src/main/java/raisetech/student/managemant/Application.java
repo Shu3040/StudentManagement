@@ -13,6 +13,7 @@ public class Application {
 
 	private String name = "Yamada Shuto";
 	private String age = "27";
+	private String sex = "male";
 
 	public static void main(String[] args) {
 
@@ -21,13 +22,14 @@ public class Application {
 
 	@GetMapping("/studentInfo")
 	public String getstudentInfo(){
-		return name + " " + age + "歳";
+		return name + " " + age + "歳" + " " + sex ;
 	}
 
 	@PostMapping ("/studentInfo")
-	public void setstudentInfo (String name,String age){
+	public void setstudentInfo (String name,String age,String sex){
 		this.name = name;
 		this.age = age;
+		this.sex = sex;
 	}
 	@PostMapping("/studentName")
 	public void  updateStudentName(String name){
