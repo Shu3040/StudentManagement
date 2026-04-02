@@ -22,9 +22,15 @@ public class Application {
 
 	@GetMapping("/studentList")
 	public List<Student> getStudentList() {
-		return repository.search();
+		return repository.searchStudent();
+	}
+
+	@GetMapping("/studentCourseList")
+	public List<StudentCourse> getStudentCourseList() {
+		return repository.searchStudentCourses();
 	}
 }
+
 
 
 

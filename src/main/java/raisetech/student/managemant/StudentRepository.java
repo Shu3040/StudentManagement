@@ -9,9 +9,10 @@ import java.util.List;
 public interface StudentRepository {
 
     @Select("SELECT * FROM students")
-    List<Student> search();
+    List<Student> searchStudent();
 
-
+    @Select("SELECT * FROM students_courses")
+    List<StudentCourse> searchStudentCourses();
 
 }
 
