@@ -24,7 +24,7 @@ public class StudentService {
     public List<Student> searchStudentList() {
 
         //年齢が30代の人のみを抽出（課題）
-        /*List<Student> students30s =new ArrayList<>();
+        List<Student> students30s =new ArrayList<>();
         for (Student student : repository.searchStudent()){
             int age = student.getAge();
             if (age >= 30 && age <= 39){
@@ -34,17 +34,17 @@ public class StudentService {
         //抽出したリストをコントローラーに返す（課題）
           return students30s;
 
-        //下記のコードは後で使うので残す。*/
-        return repository.searchStudent();
+        //下記のコードは後で使うので残す。
+       // return repository.searchStudent();
     }
 
     public List<StudentCourse> searchStudentCourseList() {
 
         //Javaコースのコース情報のみを抽出（課題）
-        /*List<StudentCourse> studentCourseJava = repository.searchStudentCourses().stream().filter(course -> "Java".equals(course.getCourseName())).collect(Collectors.toList());
+        List<StudentCourse> studentCourseJava = repository.searchStudentCourses().stream().filter(course -> "Java".equals(course.getCourseName())).collect(Collectors.toList());
 
         //抽出したリストをコントローラーに返す（課題）
-        return studentCourseJava;*/
-        return repository.searchStudentCourses();
+        return studentCourseJava;
+        //return repository.searchStudentCourses();
     }
 }
