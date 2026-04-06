@@ -42,8 +42,11 @@ public class StudentController {
 
 
     @GetMapping("/studentCourseList")
-    public List<StudentCourses> getStudentCourseList() {
-        return service.searchStudentCourseList();
+    public String getStudenCoursetList(Model model) {
+        List<StudentCourses> studentCourses = service.searchStudentCourseList();
+
+        model.addAttribute("studentCourseList",studentCourses);
+        return "studentCourseList";
     }
 }
 
