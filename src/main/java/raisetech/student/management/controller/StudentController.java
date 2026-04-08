@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import raisetech.student.management.controller.converter.StudentConverter;
 import raisetech.student.management.data.Student;
@@ -59,10 +58,13 @@ public class StudentController {
 
 
     @PostMapping ("/registerStudent")
-    public  String registerStudemt(@ModelAttribute StudentDetail studentDetail, BindingResult result){
+    public  String registerStudent(@ModelAttribute StudentDetail studentDetail, BindingResult result){
         if (result.hasErrors()){
             return "registerStudent";
         }
+
+        service.registerStudent(studentDetail.getStudent());
+
         System.out.println(studentDetail.getStudent().getName()+"さんが新規受講生として登録されました。");
     return "redirect:/studentList";
     }
