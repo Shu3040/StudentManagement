@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import raisetech.student.management.controller.converter.StudentConverter;
 import raisetech.student.management.data.Student;
-import raisetech.student.management.data.StudentCourses;
+import raisetech.student.management.data.StudentCourse;
 import raisetech.student.management.domain.StudentDetail;
 import raisetech.student.management.service.StudentService;
 
@@ -33,9 +33,9 @@ public class StudentController {
     @GetMapping("/studentList")
     public String getStudentList(Model model) {
         List<Student> students = service.searchStudentList();
-        List<StudentCourses> studentCourses = service.searchStudentCourseList();
+        List<StudentCourse> studentCourse = service.searchStudentCourseList();
 
-        model.addAttribute("studentList",converter.convertStudentDetails(students,studentCourses));
+        model.addAttribute("studentList",converter.convertStudentDetails(students,studentCourse));
         return "studentList";
     }
 
@@ -43,7 +43,7 @@ public class StudentController {
 
     @GetMapping("/studentCourseList")
     public String getStudentCourseList(Model model) {
-        List<StudentCourses> studentCourses = service.searchStudentCourseList();
+        List<StudentCourse> studentCourses = service.searchStudentCourseList();
 
         model.addAttribute("studentCourseList",studentCourses);
         return "studentCourseList";
@@ -51,6 +51,8 @@ public class StudentController {
 
     @GetMapping("/newStudent")
     public String newStudent(Model model){
+        StudentDetail studentDetail = new StudentDetail();
+        studentDetail.setStudent(new Student());
         model.addAttribute("studentDetail", new StudentDetail());
         return "registerStudent";
     }
