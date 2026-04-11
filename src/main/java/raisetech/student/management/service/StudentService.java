@@ -27,11 +27,15 @@ public class StudentService {
     }
 
     public StudentDetail serchStudent(String id){
+        //System.out.println("id=" + id);
         Student student = repository.searchStudent(id);
+        //System.out.println("student=" + student);
         List<StudentCourse> studentCourses = repository.searchStudentsCourses(student.getId());
+        //System.out.println("studentCourses=" + studentCourses);
         StudentDetail studnetDetail = new StudentDetail();
         studnetDetail.setStudent(student);
         studnetDetail.setStudentCourse(studentCourses);
+        //System.out.println("course size=" + studnetDetail.getStudentCourse().size());
         return studnetDetail;
     }
 
