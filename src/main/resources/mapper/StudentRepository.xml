@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="raisetech.student.management.repository.StudentRepository">
+
+    <update id="updateStudent">
+        UPDATE students
+        SET
+        name = #{name},
+        furigana = #{furigana},
+        nickname = #{nickname},
+        mailaddress = #{mailaddress},
+        address = #{address},
+        tel = #{tel},
+        age = #{age},
+        gender = #{gender},
+        remark = #{remark},
+        is_deleted = #{isDeleted}
+        WHERE student_id = #{studentId}
+    </update>
+
+    <update id="updateStudentCourse">
+        UPDATE student_course
+        SET course_name = #{courseName}
+        WHERE student_id = #{studentId} AND course_id = #{courseId}
+    </update>
+
+</mapper>
