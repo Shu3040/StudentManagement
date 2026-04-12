@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import raisetech.student.management.controller.converter.StudentConverter;
 import raisetech.student.management.data.Student;
 import raisetech.student.management.data.StudentCourse;
@@ -41,7 +38,7 @@ public class StudentController {
         return "studentList";
     }
 
-    @GetMapping("/Student/{id}")
+    @GetMapping("/student/{id}")
     public String getStudent(@PathVariable String id, Model model) {
         StudentDetail studentDetail =service.serchStudent(id);
         model.addAttribute("studentDetail", studentDetail);
@@ -86,6 +83,11 @@ public class StudentController {
         service.updateStudent(studentDetail);
         return "redirect:/studentList";
     }
+    @PostMapping("/deleteStudent")
+    public String deleteStudent(@RequestParam String id) {
+        service.deleteStudent(id);
+        return "redirect:/studentList";
+}
 }
 
 
