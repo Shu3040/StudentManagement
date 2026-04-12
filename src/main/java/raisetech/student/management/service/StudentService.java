@@ -67,8 +67,4 @@ public class StudentService {
             repository.updateStudentCourse(studentCourse);
         }
 }
-    @Transactional
-    public void deleteStudent(String id) {
-        repository.deleteStudent(id);
-    }
 }
