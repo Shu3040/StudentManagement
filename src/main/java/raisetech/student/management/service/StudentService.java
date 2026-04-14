@@ -3,6 +3,7 @@ package raisetech.student.management.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import raisetech.student.management.controller.converter.StudentConverter;
 import raisetech.student.management.data.Student;
 import raisetech.student.management.data.StudentCourse;
 import raisetech.student.management.domain.StudentDetail;
@@ -20,18 +21,22 @@ import java.util.List;
 public class StudentService {
 
     private StudentRepository repository;
+    private StudentConverter converter;
 
     @Autowired
-    public StudentService(StudentRepository repository) {
+    public StudentService(StudentRepository repository , StudentConverter studentConverter) {
         this.repository = repository;
+        this.converter = converter;
     }
 /*
     受講生一覧検索です。
     全権検索を行うため、条件師弟は行いません
     @return 受講生一覧（全権）
      */
-    public List<Student> searchStudentList() {
-        return repository.search();
+    public List<StudentDetail> searchStudentList() {
+        List<Student> studentList = repository.search();
+        List<StudentCourse> studentCourseList = repository.searchStudentCoursesList();
+        return converter.convertStudentDetails(studentList,studentCourseList);
     }
 
     /*
@@ -51,10 +56,6 @@ public class StudentService {
         studnetDetail.setStudentCourse(studentCourses);
         //System.out.println("course size=" + studnetDetail.getStudentCourse().size());
         return studnetDetail;
-    }
-
-    public List<StudentCourse> searchStudentCourseList() {
-        return repository.searchStudentCoursesList();
     }
 
     /*
