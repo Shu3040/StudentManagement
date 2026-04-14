@@ -15,6 +15,9 @@ import raisetech.student.management.service.StudentService;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+受講生の検索や登録・更新などを行うREST　APIとして受け付けるController
+*/
 
 @RestController
 public class StudentController {
@@ -28,6 +31,11 @@ public class StudentController {
         this.converter = converter;
     }
 
+    /*
+    受講生一覧検索です。
+    全権検索を行うため、条件指定は行いません
+    @return 受講生一覧（全権）
+     */
     @GetMapping("/studentList")
     public List<StudentDetail> getStudentList() {
         List<Student> students = service.searchStudentList();
@@ -35,6 +43,12 @@ public class StudentController {
         return converter.convertStudentDetails(students,studentCourse);
     }
 
+    /*
+    受講生検索です。
+    IDに紐づく任意の受講生の情報を取得します
+    @parm　id 受講生ID
+    @return 受講生情報
+     */
     @GetMapping("/student/{id}")
     public StudentDetail getStudent(@PathVariable String id) {
         return service.serchStudent(id);

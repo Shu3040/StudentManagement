@@ -6,20 +6,37 @@ import raisetech.student.management.data.StudentCourse;
 
 import java.util.List;
 
-
+/*
+    受講生テーブルと受講生コーステーブルと紐づくRepositoryです
+     */
 @Mapper
 public interface StudentRepository {
-
+    /*
+        受講生全件検索を行います
+        @return 受講生一覧（全件）
+         */
     @Select("SELECT * FROM students" )
     List<Student> search();
-
+    /*
+       受講生検索を行います
+       @parm　id 受講生ID
+       @return 受講生情報
+     */
     @Select("SELECT * FROM students WHERE id = #{id}")
     Student searchStudent(String id);
 
-
+    /*
+       受講生のコース情報の全件検索を行います
+       @parm　id 受講生ID
+       @return 受講生のコース情報（全件）
+                */
     @Select("SELECT * FROM students_courses")
     List<StudentCourse> searchStudentCoursesList();
-
+    /*
+          受講生IDに紐づくコース情報の検索を行います
+          @parm　studentId 受講生ID
+          @return 受講生IDに紐づく受講生のコース情報
+                   */
     @Select("SELECT * FROM students_courses WHERE student_id = #{studentId}")
     List<StudentCourse> searchStudentsCourses(String studentid);
 

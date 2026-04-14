@@ -1,0 +1,42 @@
+package raisetech.student.management.controller.converter;
+
+import jakarta.annotation.Nonnull;
+import org.springframework.stereotype.Component;
+import raisetech.student.management.data.Student;
+import raisetech.student.management.data.StudentCourse;
+import raisetech.student.management.domain.StudentDetail;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/*
+    受講生詳細を受講生や受講生コース情報、もしくはその逆の変換を行うコンバーターです。
+     */
+
+@Component
+public class StudentConverter {
+
+ /*
+    受講生に紐づく受講生コース情報をマッピングする。
+    受講生コース情報は樹子政に対して複数存在するのでループを回して受講生詳細情報を組み立てる。
+　　 @parm　students　受講生一覧
+    @parm　studentCourses 受講生コース情報のリスト
+    @return 受講生詳細壌情報のリスト
+     */
+
+    public List<StudentDetail> convertStudentDetails(List<Student> students, List<StudentCourse> studentCourses) {
+        List<StudentDetail> studentDetails = new ArrayList<>();
+        students.forEach(student -> {
+            StudentDetail studentDetail = new StudentDetail();
+            studentDetail.setStudent(student);
+
+            List<StudentCourse> convertStudentCourses = studentCourses.stream()
+                    .filter(studentCourse -> student.getId().equals(studentCourse.getStudentId()))
+                    .collect(Collectors.toList());
+            studentDetail.setStudentCourse(convertStudentCourses);
+            studentDetails.add(studentDetail);
+        });
+        return studentDetails;
+    }
+}

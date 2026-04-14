@@ -11,6 +11,11 @@ import raisetech.student.management.repository.StudentRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/*
+    受講生情報を取り扱うサービス
+    受講生の検索や登録、更新処理を行います。
+     */
+
 @Service
 public class StudentService {
 
@@ -20,12 +25,21 @@ public class StudentService {
     public StudentService(StudentRepository repository) {
         this.repository = repository;
     }
-
-    //機能を追加したいときに処理（コード）をわかりやすくするためにコントローラーではなくサービスのクラスを作成して処理を行う。
+/*
+    受講生一覧検索です。
+    全権検索を行うため、条件師弟は行いません
+    @return 受講生一覧（全権）
+     */
     public List<Student> searchStudentList() {
         return repository.search();
     }
 
+    /*
+    受講生検索です。
+    IDに紐づく任意の受講生の情報を取得した後、その受講生に紐づく受講生コース情報を取得して設定します
+    @parm　id 受講生ID
+    @return 受講生情報
+     */
     public StudentDetail serchStudent(String id){
         //System.out.println("id=" + id);
         Student student = repository.searchStudent(id);
@@ -43,7 +57,12 @@ public class StudentService {
         return repository.searchStudentCoursesList();
     }
 
-
+    /*
+        受講生検索です。
+        IDに紐づく任意の受講生の情報を取得します
+        @parm　id 受講生ID
+        @return 受講生情報
+         */
 @Transactional
       //  public void registerStudent(Student student) {
             public StudentDetail registerStudent(StudentDetail studentDetail) {
