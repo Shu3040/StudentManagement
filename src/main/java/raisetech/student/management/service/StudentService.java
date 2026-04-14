@@ -46,7 +46,7 @@ public class StudentService {
 
 @Transactional
       //  public void registerStudent(Student student) {
-            public void registerStudent(StudentDetail studentDetail) {
+            public StudentDetail registerStudent(StudentDetail studentDetail) {
     //       repository.insertStudent(student);
     repository.registerStudent(studentDetail.getStudent());
 
@@ -57,6 +57,7 @@ public class StudentService {
 
         repository.registerStudentCourse(studentCourse);
     }
+    return studentDetail;
 }
 
     @Transactional
