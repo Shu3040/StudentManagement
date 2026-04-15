@@ -3,13 +3,8 @@ package raisetech.student.management.controller;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import raisetech.student.management.controller.converter.StudentConverter;
-import raisetech.student.management.data.Student;
 import raisetech.student.management.data.StudentCourse;
 import raisetech.student.management.domain.StudentDetail;
 import raisetech.student.management.service.StudentService;
@@ -52,27 +47,26 @@ public class StudentController {
      */
     @GetMapping("/student/{id}")
     public StudentDetail getStudent(@PathVariable String id) {
-        return service.serchStudent(id);
+        return service.searchStudent(id);
     }
 
     /*
-            受講生を新規登録します
-            IDに関しては自動採番を行う
-            @parm　student　受講生
-                     */
+    受講生を新規登録します
+    IDに関しては自動採番を行う
+    @parm　student　受講生
+     */
     @GetMapping("/newStudent")
-    public String newStudent(Model model){
+    public ResponseEntity<StudentDetail> newStudent(){
         StudentDetail studentDetail = new StudentDetail();
         studentDetail.setStudentCourseList(Arrays.asList(new StudentCourse()));
-        model.addAttribute("studentDetail", studentDetail);
-        return "registerStudent";
+        return ResponseEntity.ok(studentDetail);
     }
 
     /*
-           受講生詳細の登録を行います。
-           @parm　studentDetail 受講生詳細
-           @return 実行結果
-            */
+    受講生詳細の登録を行います。
+    @parm　studentDetail 受講生詳細
+    @return 実行結果
+     */
     @PostMapping ("/registerStudent")
     public ResponseEntity<StudentDetail> registerStudent(@RequestBody @Valid StudentDetail studentDetail){
         StudentDetail responseStudentDetail =service.registerStudent(studentDetail);
@@ -80,11 +74,11 @@ public class StudentController {
     }
 
     /*
-              受講生詳細の更新を行います
-              キャンセルフラグの更新もここで行います（論理削除）
-              @parm　studentDetail　受講生詳細
-              @return　実行結果
-                       */
+    受講生詳細の更新を行います
+    キャンセルフラグの更新もここで行います（論理削除）
+    @parm　studentDetail　受講生詳細
+    @return　実行結果
+     */
     @PutMapping ("/updateStudent")
     public ResponseEntity<String> updateStudent(@RequestBody @Valid StudentDetail studentDetail) {
         service.updateStudent(studentDetail);
