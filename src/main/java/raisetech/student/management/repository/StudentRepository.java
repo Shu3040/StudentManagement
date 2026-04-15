@@ -21,7 +21,7 @@ public interface StudentRepository {
     @parm　id 受講生ID
     @return 受講生情報
      */
-    Student searchStudent(String id);
+    Student searchStudent(@Param("id") String id);
 
     /*
     受講生のコース情報の全件検索を行います
@@ -35,7 +35,7 @@ public interface StudentRepository {
     @parm　studentId 受講生ID
     @return 受講生IDに紐づく受講生のコース情報
      */
-    List<StudentCourse> searchStudentCourse(String studentid);
+    List<StudentCourse> searchStudentCourse(@Param("studentId") String studentId);
 
     /*
     受講生を新規登録します
