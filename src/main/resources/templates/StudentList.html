@@ -21,8 +21,8 @@
         <th>削除</th>
     </tr>
 </thead>
-    <tbody>
-    <tr th:each ="studentDetail : ${studentList}">
+    <tbody id="studentTableBody">
+   <!-- <tr th:each ="studentDetail : ${studentList}">
     <td th:text="${studentDetail.student.id}">111</td>
         <td>
             <a href="/studentList" th:href="@{/student/{id}(id=${studentDetail.student.id})}"
@@ -38,8 +38,44 @@
         <td>
         <input type="checkbox" th:checked="${studentDetail.student.isDeleted}" />
         </td>
-    </tr>
+    </tr> -->
 </tbody>
 </table>
+<script>
+    fetch("/studentList")
+        .then(res => res.json())
+        .then(data => {
+            const tbody = document.getElementById("studentTableBody");
+
+            data.forEach(detail => {
+                const student = detail.student;
+
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${student.id}</td>
+                    <td>
+                        <a href="/student/${student.id}">
+                            ${student.name}
+                        </a>
+                    </td>
+                    <td>${student.furigana}</td>
+                    <td>${student.nickname}</td>
+                    <td>${student.mailaddress}</td>
+                    <td>${student.address}</td>
+                    <td>${student.age ?? ""}</td>
+                    <td>${student.gender ?? ""}</td>
+                    <td>${student.remark ?? ""}</td>
+                    <td>
+                        <input type="checkbox" ${student.deleted ? "checked" : ""} disabled />
+                    </td>
+                `;
+
+                tbody.appendChild(row);
+            });
+        })
+        .catch(() => alert("データ取得失敗"));
+</script>
+
 </body>
 </html>
