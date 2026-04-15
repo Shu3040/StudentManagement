@@ -17,7 +17,6 @@ public class Student {
     private String mailaddress;
     private String address;
     private String tel;
-    @NotNull
     @Min(15)
     @Max(70)
     private int age;
