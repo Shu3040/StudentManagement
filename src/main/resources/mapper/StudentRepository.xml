@@ -5,6 +5,38 @@
 
 <mapper namespace="raisetech.student.management.repository.StudentRepository">
 
+    <!--受講生の全件検索-->
+    <select id="search" resultType="raisetech.student.management.data.Student">
+        SELECT * FROM students
+    </select>
+
+    <!--受講生の検索-->
+    <select id="searchStudent" resultType="raisetech.student.management.data.Student">
+        SELECT * FROM students WHERE id = #{id}
+    </select>
+
+    <!-- コース（ID指定） -->
+    <select id="searchStudentCourse" resultType="raisetech.student.management.data.StudentCourse">
+        SELECT * FROM students_courses WHERE student_id = #{studentId}
+    </select>
+
+    <!-- 受講生登録 -->
+    <insert id="registerStudent" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO students
+        (name, furigana, nickname, mailaddress, address, tel, age, gender, remark, is_deleted)
+        VALUES
+        (#{name}, #{furigana}, #{nickname}, #{mailaddress}, #{address}, #{tel}, #{age}, #{gender}, #{remark}, #{isDeleted})
+    </insert>
+
+    <!-- コース登録 -->
+    <insert id="registerStudentCourse" useGeneratedKeys="true" keyProperty="courseId">
+        INSERT INTO students_courses
+        (student_id, course_name, start_date, end_date)
+        VALUES
+        (#{studentId}, #{courseName}, #{startDate}, #{endDate})
+    </insert>
+
+    <!-- 受講生情報更新 -->
     <update id="updateStudent">
         UPDATE students
         SET
@@ -18,13 +50,15 @@
         gender = #{gender},
         remark = #{remark},
         is_deleted = #{isDeleted}
-        WHERE student_id = #{studentId}
+        WHERE id = #{id}
     </update>
 
+    <!-- コース情報更新 -->
     <update id="updateStudentCourse">
-        UPDATE student_course
+        UPDATE students_courses
         SET course_name = #{courseName}
         WHERE student_id = #{studentId} AND course_id = #{courseId}
     </update>
+
 
 </mapper>
