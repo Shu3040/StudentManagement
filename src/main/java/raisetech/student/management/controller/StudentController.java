@@ -34,7 +34,7 @@ public class StudentController {
     /*
     受講生一覧検索です。
     全権検索を行うため、条件指定は行いません
-    @return 受講生一覧（全権）
+    @return 受講生詳細一覧（全件）
      */
     @GetMapping("/studentList")
     public List<StudentDetail> getStudentList() {
@@ -42,7 +42,7 @@ public class StudentController {
     }
 
     /*
-    受講生検索です。
+    受講生詳細の検索です。
     IDに紐づく任意の受講生の情報を取得します
     @parm　id 受講生ID
     @return 受講生情報
@@ -52,31 +52,37 @@ public class StudentController {
         return service.serchStudent(id);
     }
 
-
-    /*@GetMapping("/studentCourseList")
-    public String getStudentCourseList(Model model) {
-        List<StudentCourse> studentCourses = service.searchStudentCourseList();
-
-        model.addAttribute("studentCourseList",studentCourses);
-        return "studentCourseList";
-    }*/
-
+    /*
+            受講生を新規登録します
+            IDに関しては自動採番を行う
+            @parm　student　受講生
+                     */
     @GetMapping("/newStudent")
     public String newStudent(Model model){
         StudentDetail studentDetail = new StudentDetail();
-        studentDetail.setStudentCourse(Arrays.asList(new StudentCourse()));
+        studentDetail.setStudentCourseList(Arrays.asList(new StudentCourse()));
         model.addAttribute("studentDetail", studentDetail);
         return "registerStudent";
     }
 
+    /*
+           受講生詳細の登録を行います。
+           @parm　studentDetail 受講生詳細
+           @return 実行結果
+            */
     @PostMapping ("/registerStudent")
     public ResponseEntity<StudentDetail> registerStudent(@RequestBody StudentDetail studentDetail){
-        //service.registerStudent(studentDetail.getStudent());
         StudentDetail responseStudentDetail =service.registerStudent(studentDetail);
-    return ResponseEntity.ok(studentDetail);
+    return ResponseEntity.ok(responseStudentDetail);
     }
 
-    @PostMapping ("/updateStudent")
+    /*
+              受講生詳細の更新を行います
+              キャンセルフラグの更新もここで行います（論理削除）
+              @parm　studentDetail　受講生詳細
+              @return　実行結果
+                       */
+    @PutMapping ("/updateStudent")
     public ResponseEntity<String> updateStudent(@RequestBody StudentDetail studentDetail) {
         service.updateStudent(studentDetail);
         return ResponseEntity.ok("更新処理が成功しました。");

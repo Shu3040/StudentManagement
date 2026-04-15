@@ -1,6 +1,5 @@
 package raisetech.student.management.controller.converter;
 
-import jakarta.annotation.Nonnull;
 import org.springframework.stereotype.Component;
 import raisetech.student.management.data.Student;
 import raisetech.student.management.data.StudentCourse;
@@ -24,17 +23,17 @@ public class StudentConverter {
     @parm　studentCourses 受講生コース情報のリスト
     @return 受講生詳細壌情報のリスト
      */
-
-    public List<StudentDetail> convertStudentDetails(List<Student> students, List<StudentCourse> studentCourses) {
+    public List<StudentDetail> convertStudentDetails(List<Student> studentList, List<StudentCourse> studentCourseList) {
         List<StudentDetail> studentDetails = new ArrayList<>();
-        students.forEach(student -> {
+        studentList.forEach(student -> {
             StudentDetail studentDetail = new StudentDetail();
             studentDetail.setStudent(student);
 
-            List<StudentCourse> convertStudentCourses = studentCourses.stream()
+            List<StudentCourse> convertStudentCoursesList = studentCourseList.stream()
                     .filter(studentCourse -> student.getId().equals(studentCourse.getStudentId()))
                     .collect(Collectors.toList());
-            studentDetail.setStudentCourse(convertStudentCourses);
+
+            studentDetail.setStudentCourseList(convertStudentCoursesList);
             studentDetails.add(studentDetail);
         });
         return studentDetails;
