@@ -1,0 +1,77 @@
+*   [33m6252189[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Merge postman branch into main, resolve all conflicts
+[31m|[m[32m\[m  
+[31m|[m * [33m48cd6b0[m[33m ([m[1;32mpostman[m[33m)[m WIP
+[31m|[m * [33m92dec29[m[33m ([m[1;31morigin/postman[m[33m)[m updateStudentのメソッドをPOSTからPUTに修正
+[31m|[m * [33md0dc11a[m studentCourseListのエンドポイントの追加としてコース情報の全件検索を実装
+[31m|[m * [33mdd2644b[m Controllerに合わせてthymeleafからREST　APIの形式に変更
+[31m|[m * [33m1d180c1[m Controllerに合わせてthymeleafからREST　APIの形式に変更
+[31m|[m * [33m0e8d795[m Controllerに合わせてthymeleafからREST　APIの形式に変更
+[31m|[m * [33m9117d35[m typoを修正
+[31m|[m * [33m295b8be[m @Paramを追加し修正
+[31m|[m * [33m9d14d4e[m バリデーションを使用する設定を修正
+[31m|[m * [33mc5ed577[m 受講生の新規登録をRestController使用する形式に変更
+[31m|[m * [33me14bc14[m 修正はしていないがStudentCourseクラスに studentId フィールドがあることを確認
+[31m|[m * [33m72339db[m 受講生情報に年齢制限をかけ、Controllerに入力チェックする処理を追加した
+[31m|[m * [33m0dda9bc[m 受講生コースの全件検索が抜けていたため追加
+[31m|[m * [33m43ca639[m StudentRepositoryのxmlを作成し、内容を整理
+[31m|[m * [33m465afdb[m リファクタリングで変数名やコードの整理 各処理の内容をメモした
+[31m|[m * [33m27b1978[m 全件検索をリファクタリング
+[31m|[m * [33mb9f77bc[m 各処理にコードの内容がわかりやすいように簡単な説明を挿入
+[31m|[m * [33m76fb678[m 登録をAPIを使用する形式に変更
+[31m|[m * [33mcfab6da[m ID検索をAPIを使用する形式に変更
+[31m|[m * [33m0d89eed[m postman(APIツール) で処理する形式にコードを修正
+[31m|[m * [33m5b5240f[m[33m ([m[1;31morigin/updateStudent[m[33m, [m[1;32mupdateStudent[m[33m)[m 名称の変更
+[31m|[m * [33m742c06e[m 削除処理呼び出しの修正
+[31m|[m * [33mba6d38d[m 削除処理の修正
+[31m|[m * [33m21ec2e5[m キャンセルの追加
+[31m|[m * [33mde08597[m 削除処理の修正
+[31m|[m * [33m33cdd3a[m サービスから削除を呼び出す処理を追加
+[31m|[m * [33m4ad12a0[m 削除処理を追加
+[31m|[m * [33md0eba08[m idをもとに削除更新する処理を追加
+[31m|[m * [33mad2cc4d[m 削除ボタンを追加
+[31m|[m * [33mbca27fb[m コースIDでの処理を追加
+[31m|[m * [33m4abb4e0[m コース情報の処理にIDでの処理を追加
+[31m|[m * [33m6567ed1[m リンクが正常に作動しないエラーの確認のためのコードを追加（修正したため//）
+[31m|[m * [33m089d935[m 受講コース名でエラーが発生しリンクが正常に動作しなかったため修正
+[31m|[m * [33m4394d43[m 受講生情報の名前にリンクを追加
+[31m|[m * [33m79be443[m アップデート処理を追加
+[31m|[m * [33m4dc6857[m アップデート処理の呼び出しを追加
+[31m|[m * [33m2b14586[m アップデート処理を追加
+[31m|[m * [33mc203983[m 情報更新のHTMLの作成
+[31m|[m * [33m769b861[m[33m ([m[1;32m講座29[m[33m)[m 入力項目の追加
+[31m|[m * [33m2c6d118[m[33m ([m[1;31morigin/registerStudent修正[m[33m, [m[1;32mregisterStudent修正[m[33m)[m コントローラーに登録処理を呼び出す処理を追加 その後登録内容を出力する処理を追加
+[31m|[m * [33mef39731[m サービスに情報をDBに登録する処理を追加
+[31m|[m * [33mf14f1fb[m 受講生情報を追加する処理を追加
+[31m|[m * [33macc6ddd[m データパッケージが消えたため復元
+[31m|[m * [33m9932725[m[33m ([m[1;31morigin/registerStudent[m[33m, [m[1;32mregisterStudent[m[33m)[m StudentRepositoryに新規登録を追加 Serviceに追加した新規登録を呼び出す処理を追加 ControllerにServiceを呼び出す処理を追加
+[31m|[m * [33m9fc7d59[m 新規受講生を登録するための処理をコントローラーに追加
+[31m|[m * [33m03586b8[m 新規受講生を登録するためのHTMLを作成
+* [32m|[m [33m8ae2c27[m[33m ([m[1;31morigin/main[m[33m)[m Merge pull request #6 from Shu3040/TymeLeaf
+[33m|[m[32m\[m[32m|[m 
+[33m|[m * [33mea73895[m[33m ([m[1;31morigin/TymeLeaf[m[33m, [m[1;32mTymeLeaf[m[33m)[m ビュー名とテンプレートファイル名の大文字小文字が一致するように修正 不要なインポートの削除
+[33m|[m * [33m24ebbc8[m StudentCourseListをHTMLで出力するように変更
+[33m|[m * [33m76370e6[m StudentCourseList.htmlを作成
+[33m|[m * [33m263dbef[m コントローラーを作成したHTMLで出力するように変更
+[33m|[m * [33m341058a[m th:text="#になっていたのでth:text="$に修正
+[33m|[m * [33m6d7a09d[m StudentListのHTMLを作成
+* [34m|[m   [33m23d17af[m Merge pull request #5 from Shu3040/Converter
+[35m|[m[36m\[m [34m\[m  
+[35m|[m * [34m|[m [33md6bfdb7[m[33m ([m[1;31morigin/Converter[m[33m, [m[1;32mConverter[m[33m)[m Studentの要素として備考と論理削除を追加
+[35m|[m * [34m|[m [33m2e8c232[m 受講生情報を年齢で抽出する処理とコース情報をJavaで抽出するコードを削除
+[35m|[m * [34m|[m [33m872a663[m Converterの実装 受講生情報をコース情報をIDにより紐づける
+[35m|[m [34m|[m[34m/[m  
+* [34m|[m   [33m44f8245[m Merge pull request #3 from Shu3040/Mapping_studentList
+[1;31m|[m[1;32m\[m [34m\[m  
+[1;31m|[m * [34m|[m [33m70d4695[m[33m ([m[1;31morigin/Mapping_studentList[m[33m, [m[1;32mMapping_studentList[m[33m)[m startDataとendDataの型をStringからLocalDataTimeに変更
+[1;31m|[m * [34m|[m [33me7b1038[m StudentCourseクラスの変数名をキャメルケースになるように修正
+[1;31m|[m * [34m|[m [33mbc22b31[m mysqlから受講コース情報をとってくる機能を追加
+[1;31m|[m * [34m|[m [33m6cca256[m mysqlから受講生情報をとってくる機能を追加
+* [1;32m|[m [34m|[m [33m7e6764e[m Merge pull request #1 from Shu3040/Mapping
+[34m|[m[1;32m\[m[1;32m|[m [34m|[m 
+[34m|[m [1;32m|[m[34m/[m  
+[34m|[m[34m/[m[1;32m|[m   
+[34m|[m * [33m9251e44[m[33m ([m[1;31morigin/Mapping[m[33m, [m[1;32mMapping[m[33m)[m 情報として性別を追加
+[34m|[m[34m/[m  
+* [33m04c9db3[m nameのみを更新するPostMappingの追加
+* [33me3395ee[m PostMapping追加
+* [33m41f95a1[m 初回コミット
