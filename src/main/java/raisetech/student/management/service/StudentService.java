@@ -41,13 +41,21 @@ public class StudentService {
     /*
     受講生詳細の検索です。
     IDに紐づく任意の受講生の情報を取得した後、その受講生に紐づく受講生コース情報を取得して設定します
-    @parm　id 受講生ID
     @return 受講生情報
      */
     public StudentDetail searchStudent(String id){
         Student student = repository.searchStudent(id);
         List<StudentCourse> studentCourses = repository.searchStudentCourse(student.getId());
         return new StudentDetail(student,studentCourses);
+    }
+
+    /*
+        受講生コース情報の全件検索です。
+        @parm　id 受講生ID
+        @return 受講生情報
+         */
+    public List<StudentCourse> searchStudentCourseList() {
+        return repository.searchStudentCoursesList();
     }
 
     /*

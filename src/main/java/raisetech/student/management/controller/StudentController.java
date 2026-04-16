@@ -31,12 +31,22 @@ public class StudentController {
 
     /*
     受講生一覧検索です。
-    全権検索を行うため、条件指定は行いません
+    全件検索を行うため、条件指定は行いません
     @return 受講生詳細一覧（全件）
      */
     @GetMapping("/studentList")
     public List<StudentDetail> getStudentList() {
         return service.searchStudentList();
+    }
+
+    /*
+    受講生コース情報の全件検索です。
+    全件検索を行うため、条件指定は行いません
+    @return 受講生コース情報一覧（全件）
+     */
+    @GetMapping("/studentCourseList")
+    public List<StudentCourse> getStudentCourseList() {
+        return service.searchStudentCourseList();
     }
 
     /*
