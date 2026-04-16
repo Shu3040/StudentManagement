@@ -19,17 +19,39 @@
   </tr>
   </thead>
 
-  <tbody>
-  <tr th:each="course : ${studentCourseList}">
-    <td th:text="${course.courseId}">001</td>
-    <td th:text="${course.id}">111</td>
+  <tbody id="courseTableBody">
+  <!-- <tr th:each="course : ${studentCourseList}">
+    <td th:text="${course.courseId}">1</td>
+    <td th:text="${course.studentId}">111</td>
     <td th:text="${course.courseName}">Java</td>
     <td th:text="${course.startDate}">2025-05-05</td>
     <td th:text="${course.endDate}">2025-11-01</td>
-  </tr>
+  </tr> -->
   </tbody>
 
 </table>
+<script>
+  fetch("/studentCourseList")
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.getElementById("courseTableBody");
+
+      data.forEach(course => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${course.courseId}</td>
+          <td>${course.studentId}</td>
+          <td>${course.courseName}</td>
+          <td>${course.startDate}</td>
+          <td>${course.endDate}</td>
+        `;
+
+        tbody.appendChild(row);
+      });
+    })
+    .catch(() => alert("データ取得失敗"));
+</script>
 
 </body>
 </html>

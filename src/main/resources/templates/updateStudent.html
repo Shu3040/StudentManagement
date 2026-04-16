@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>受講生詳細</title>
+</head>
+<body>
+<h1>受講生詳細</h1>
+<!-- <form th:action="@{/updateStudent}" th:object="${studentDetail}" method="post"> -->
+<form id="updateForm">
+    <div>
+        <label for="id">ID:</label>
+        <!-- <input type="text" id="id" th:field="*{student.id}" required/> -->
+        <input type="text" id="id" readonly/>
+    </div>
+    <div>
+        <label for="name">名前:</label>
+        <input type="text" id="name" required/>
+    </div>
+    <div>
+        <label for="furigana">フリガナ:</label>
+        <input type="text" id="furigana" required/>
+    </div>
+    <div>
+        <label for="nickname">ニックネーム:</label>
+        <input type="text" id="nickname" required/>
+    </div>
+    <div>
+        <label for="mailaddress">メールアドレス:</label>
+        <input type="text" id="mailaddress" required/>
+    </div>
+    <div>
+        <label for="address">住所:</label>
+        <input type="text" id="address" required/>
+    </div>
+    <div>
+        <label for="tel">電話番号:</label>
+        <input type="text" id="tel" required/>
+    </div>
+    <div>
+        <label for="age">年齢:</label>
+        <input type="text" id="age"/>
+    </div>
+    <div>
+        <label for="gender">性別:</label>
+        <input type="text" id="gender"/>
+    </div>
+    <div>
+        <label for="remark">備考:</label>
+        <input type="text" id="remark"/>
+    </div>
+    <div>
+        <label>削除:</label>
+        <input type="checkbox" id="deleted"/>
+    </div>
+    <!-- <div th:each="course, stat : *{studentCourse}"> -->
+    <div>
+        <label> 受講コースID: </label>
+        <!-- <input type="text" th:field="*{studentCourse[__${stat.index}__].courseId}" /> -->
+        <input type="text" id="courseId"/>
+        <label> 受講コース名: </label>
+        <input type="text" id="courseName"/>
+    </div>
+    <div>
+        <button type="submit">更新</button>
+    </div>
+
+</form>
+<script>
+    // URLからID取得
+    const id = window.location.pathname.split("/").pop();
+
+    // 初期データ取得
+    fetch(`/student/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            const student = data.student;
+            const course = data.studentCourseList[0] || {};
+
+            document.getElementById("id").value = student.id;
+            document.getElementById("name").value = student.name;
+            document.getElementById("furigana").value = student.furigana;
+            document.getElementById("nickname").value = student.nickname;
+            document.getElementById("mailaddress").value = student.mailaddress;
+            document.getElementById("address").value = student.address;
+            document.getElementById("tel").value = student.tel;
+            document.getElementById("age").value = student.age ?? "";
+            document.getElementById("gender").value = student.gender ?? "";
+            document.getElementById("remark").value = student.remark ?? "";
+            document.getElementById("deleted").checked = student.deleted;
+
+            document.getElementById("courseId").value = course.courseId ?? "";
+            document.getElementById("courseName").value = course.courseName ?? "";
+        });
+
+    // 更新処理
+    document.getElementById("updateForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const data = {
+            student: {
+                id: document.getElementById("id").value,
+                name: document.getElementById("name").value,
+                furigana: document.getElementById("furigana").value,
+                nickname: document.getElementById("nickname").value,
+                mailaddress: document.getElementById("mailaddress").value,
+                address: document.getElementById("address").value,
+                tel: document.getElementById("tel").value,
+                age: Number(document.getElementById("age").value),
+                gender: document.getElementById("gender").value,
+                remark: document.getElementById("remark").value,
+                deleted: document.getElementById("deleted").checked
+            },
+            studentCourseList: [
+                {
+                    courseId: document.getElementById("courseId").value,
+                    courseName: document.getElementById("courseName").value
+                }
+            ]
+        };
+
+        fetch("/updateStudent", {
+            method: "PUT", // PUTでもOK（Controller次第）
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => {
+            if (res.ok) {
+                alert("更新成功");
+                window.location.href = "/studentList";
+            } else {
+                alert("更新失敗");
+            }
+        })
+        .catch(() => alert("通信エラー"));
+    });
+</script>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-package raisetech.student.managemant;
+package raisetech.student.management;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
