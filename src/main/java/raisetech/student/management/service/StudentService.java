@@ -11,7 +11,6 @@ import raisetech.student.management.repository.StudentRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 /*
     受講生情報を取り扱うサービス
     受講生の検索や登録、更新処理を行います。
@@ -25,19 +24,20 @@ public class StudentService {
     private StudentConverter converter;
 
     @Autowired
-    public StudentService(StudentRepository repository , StudentConverter studentConverter) {
+    public StudentService(StudentRepository repository, StudentConverter studentConverter) {
         this.repository = repository;
         this.converter = studentConverter;
     }
-/*
-    受講生詳細の一覧検索です。
-    全権検索を行うため、条件師弟は行いません
-    @return 受講生詳細一覧（全件）
-     */
+
+    /*
+        受講生詳細の一覧検索です。
+        全権検索を行うため、条件師弟は行いません
+        @return 受講生詳細一覧（全件）
+         */
     public List<StudentDetail> searchStudentList() {
         List<Student> studentList = repository.search();
         List<StudentCourse> studentCourseList = repository.searchStudentCoursesList();
-        return converter.convertStudentDetails(studentList,studentCourseList);
+        return converter.convertStudentDetails(studentList, studentCourseList);
     }
 
     /*
@@ -45,10 +45,10 @@ public class StudentService {
     IDに紐づく任意の受講生の情報を取得した後、その受講生に紐づく受講生コース情報を取得して設定します
     @return 受講生情報
      */
-    public StudentDetail searchStudent(String id){
+    public StudentDetail searchStudent(String id) {
         Student student = repository.searchStudent(id);
         List<StudentCourse> studentCourses = repository.searchStudentCourse(student.getId());
-        return new StudentDetail(student,studentCourses);
+        return new StudentDetail(student, studentCourses);
     }
 
     /*
@@ -66,17 +66,18 @@ public class StudentService {
         @parm　studentDetail 受講生詳細
         @return 登録情報を付与した受講生詳細
          */
-@Transactional
-     public StudentDetail registerStudent(StudentDetail studentDetail) {
-    Student student = studentDetail.getStudent();
+    @Transactional
+    public StudentDetail registerStudent(StudentDetail studentDetail) {
+        Student student = studentDetail.getStudent();
 
-    repository.registerStudent(student);
-    studentDetail.getStudentCourseList().forEach(studentCourse -> {
-        initStudentCourse(studentCourse, student);
-        repository.registerStudentCourse(studentCourse);
-    });
-    return studentDetail;
-}
+        repository.registerStudent(student);
+        studentDetail.getStudentCourseList().forEach(studentCourse -> {
+            initStudentCourse(studentCourse, student);
+            repository.registerStudentCourse(studentCourse);
+        });
+        return studentDetail;
+    }
+
     /*
             受講生コース情報を登録する際の初期情報を設定する
             @parm　studentCourse　受講生コース情報
@@ -100,5 +101,5 @@ public class StudentService {
         repository.updateStudent(studentDetail.getStudent());
         studentDetail.getStudentCourseList()
                 .forEach(studentCourse -> repository.updateStudentCourse(studentCourse));
-        }
+    }
 }
