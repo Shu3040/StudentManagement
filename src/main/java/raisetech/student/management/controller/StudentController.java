@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import raisetech.student.management.data.Student;
 import raisetech.student.management.data.StudentCourse;
 import raisetech.student.management.domain.StudentDetail;
+import raisetech.student.management.exception.TestException;
 import raisetech.student.management.service.StudentService;
 
 import java.util.Arrays;
@@ -46,8 +47,9 @@ public class StudentController {
     @return 受講生コース情報一覧（全件）
      */
     @GetMapping("/studentCourseList")
-    public List<StudentCourse> getStudentCourseList() {
-        return service.searchStudentCourseList();
+    public List<StudentCourse> getStudentCourseList()throws TestException {
+        throw new TestException("例外処理を発生させています。");
+        //return service.searchStudentCourseList();
     }
 
     /*
