@@ -1,6 +1,9 @@
 package raisetech.student.management.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +39,14 @@ public class StudentController {
     全件検索を行うため、条件指定は行いません
     @return 受講生詳細一覧（全件）
      */
-    @Operation(summary = "一覧検索", description = "受講生の一覧を検索します。")
+    @Operation(summary = "受講生一覧検索", description = "受講生の一覧を検索します。",
+            responses = {@ApiResponse(responseCode = "200", description = "受講生詳細一覧（全件）",
+            content = @Content(array = @ArraySchema(schema = @Schema(implementation = StudentDetail.class)
+                    )
+            )
+            )
+    }
+    )
     @GetMapping("/studentList")
     public List<StudentDetail> getStudentList() {
         return service.searchStudentList();
@@ -47,6 +57,7 @@ public class StudentController {
     全件検索を行うため、条件指定は行いません
     @return 受講生コース情報一覧（全件）
      */
+    @Operation(summary = "受講コース一覧検索", description = "受講生のコース情報の一覧検索します。")
     @GetMapping("/studentCourseList")
     public List<StudentCourse> getStudentCourseList() {
         return service.searchStudentCourseList();
@@ -58,6 +69,7 @@ public class StudentController {
     @parm　id 受講生ID
     @return 受講生情報
      */
+    @Operation(summary = "受講生検索", description = "受講生を検索します。")
     @GetMapping("/student/{id}")
     public StudentDetail getStudent(@PathVariable String id) {
         return service.searchStudent(id);
@@ -81,6 +93,7 @@ public class StudentController {
     @parm　studentDetail 受講生詳細
     @return 実行結果
      */
+    @Operation(summary = "受講生詳細登録", description = "受講生の詳細を登録します。")
     @PostMapping ("/registerStudent")
     public ResponseEntity<StudentDetail> registerStudent(@RequestBody @Valid StudentDetail studentDetail){
         StudentDetail responseStudentDetail =service.registerStudent(studentDetail);
@@ -93,6 +106,7 @@ public class StudentController {
     @parm　studentDetail　受講生詳細
     @return　実行結果
      */
+    @Operation(summary = "受講生詳細更新", description = "受講生の詳細情報を更新します。")
     @PutMapping ("/updateStudent")
     public ResponseEntity<String> updateStudent(@RequestBody @Valid StudentDetail studentDetail) {
         service.updateStudent(studentDetail);
