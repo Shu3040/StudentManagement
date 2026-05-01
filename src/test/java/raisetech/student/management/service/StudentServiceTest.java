@@ -115,5 +115,4 @@ class StudentServiceTest {
         Mockito.verify(repository, Mockito.times(1)).updateStudentCourse(course1);
         Mockito.verify(repository, Mockito.times(1)).updateStudentCourse(course2);
     }
-
     }
