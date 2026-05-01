@@ -35,8 +35,6 @@ class StudentServiceTest {
     @Test
     void 受講生詳細の一覧検索_リポジトリとコンバーターの処理が適切に呼び出せていること() {
         //事前準備
-        StudentService sut = new StudentService(repository, converter);
-        //List<StudentDetail> expected = new ArrayList<>();
         List<Student> studentList = new ArrayList<>();
         List<StudentCourse> studentCourseList = new ArrayList<>();
         Mockito.when(repository.search()).thenReturn(studentList);
@@ -46,7 +44,6 @@ class StudentServiceTest {
         List<StudentDetail> actual = sut.searchStudentList();
 
         //検証
-        //Assertions.assertEquals(expected,actual);
         Mockito.verify(repository, Mockito.times(1)).search();
         Mockito.verify(repository, Mockito.times(1)).searchStudentCoursesList();
         Mockito.verify(converter, Mockito.times(1)).convertStudentDetails(studentList, studentCourseList);
