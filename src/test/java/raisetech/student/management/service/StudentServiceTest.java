@@ -78,6 +78,17 @@ class StudentServiceTest {
     }
 
     @Test
+    void 受講生詳細の一覧検索_異常系リポジトリが例外を投げた場合() {
+
+        Mockito.when(repository.search())
+                .thenThrow(new RuntimeException("DB error"));
+
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            sut.searchStudentList();
+        });
+    }
+
+    @Test
     void 受講生コース情報の全件検索() {
         List<StudentCourse> expected = new ArrayList<>();
         Mockito.when(repository.searchStudentCoursesList()).thenReturn(expected);
