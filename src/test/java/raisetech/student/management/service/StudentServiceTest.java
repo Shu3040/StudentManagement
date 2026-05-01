@@ -16,8 +16,6 @@ import raisetech.student.management.repository.StudentRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.management.Query.times;
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class StudentServiceTest {
