@@ -67,6 +67,17 @@ class StudentServiceTest {
     }
 
     @Test
+    void 受講生詳細の検索_異常系IDが存在しない場合() {
+        String id = "not-exist";
+
+        Mockito.when(repository.searchStudent(id)).thenReturn(null);
+
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            sut.searchStudent(id);
+        });
+    }
+
+    @Test
     void 受講生コース情報の全件検索() {
         List<StudentCourse> expected = new ArrayList<>();
         Mockito.when(repository.searchStudentCoursesList()).thenReturn(expected);
