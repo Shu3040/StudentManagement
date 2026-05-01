@@ -37,6 +37,8 @@ public interface StudentRepository {
      */
     List<StudentCourse> searchStudentCourse(@Param("studentId") String studentId);
 
+
+
     /*
     受講生を新規登録します
     IDに関しては自動採番を行う

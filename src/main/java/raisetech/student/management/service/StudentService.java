@@ -52,10 +52,10 @@ public class StudentService {
     }
 
     /*
-        受講生コース情報の全件検索です。
-        @parm　id 受講生ID
-        @return 受講生情報
-         */
+     受講生コース情報の全件検索です。
+     @parm　id 受講生ID
+     @return 受講生情報
+     */
     public List<StudentCourse> searchStudentCourseList() {
         return repository.searchStudentCoursesList();
     }
@@ -77,12 +77,11 @@ public class StudentService {
         });
         return studentDetail;
     }
-
     /*
-            受講生コース情報を登録する際の初期情報を設定する
-            @parm　studentCourse　受講生コース情報
-            @parm  student　受講生
-             */
+     受講生コース情報を登録する際の初期情報を設定する
+     @parm　studentCourse　受講生コース情報
+     @parm  student　受講生
+     */
     private void initStudentCourse(StudentCourse studentCourse, Student student) {
         LocalDateTime now = LocalDateTime.now();
 
@@ -92,10 +91,10 @@ public class StudentService {
     }
 
     /*
-               受講生詳細の更新を行います
-               受講生と受講生コース情報をそれぞれ更新します。
-               @parm　studentDetail　受講生詳細
-                        */
+     受講生詳細の更新を行います
+     受講生と受講生コース情報をそれぞれ更新します。
+     @parm　studentDetail　受講生詳細
+     */
     @Transactional
     public void updateStudent(StudentDetail studentDetail) {
         repository.updateStudent(studentDetail.getStudent());
